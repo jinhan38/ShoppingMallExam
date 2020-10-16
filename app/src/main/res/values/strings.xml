@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ShoppingMallExam</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_content">Another year, another update to the world’s most popular mobile operating system — and this year,
+        that means Android 11. But what could Google possibly add to a platform that’s been kicking for more than a decade,
+        that seemingly already contains every feature under the sun? That’s where Android 11 comes in.
+        As we’ve come to expect from Android updates in recent years,
+        version 11 opts for smaller changes rather than transformative ones,
+        that make navigating Google’s OS a bit more intuitive and convenient.
+        Redesigned screenshots and media playback controls,
+        a new way to message friends and useful tweaks to app permissions may not be earth-shattering additions,
+        but they’re nonetheless appreciated.</string>
+</resources>

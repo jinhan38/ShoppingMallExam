@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/parentFragment">
+
+    <fragment
+        android:id="@+id/parentFragment"
+        android:name="com.shoppingmallexam.ui.base.ParentFragment"
+        android:label="fragment_parent"
+        tools:layout="@layout/fragment_parent" >
+        <action
+            android:id="@+id/action_parentFragment_to_manFragment"
+            app:destination="@id/manFragment" />
+        <action
+            android:id="@+id/action_parentFragment_to_womenFragment"
+            app:destination="@id/womenFragment" />
+        <action
+            android:id="@+id/action_parentFragment_to_lifeFragment"
+            app:destination="@id/lifeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manFragment"
+        android:name="com.shoppingmallexam.ui.man.ManFragment"
+        android:label="fragment_man"
+        tools:layout="@layout/fragment_man" />
+    <fragment
+        android:id="@+id/womenFragment"
+        android:name="com.shoppingmallexam.ui.women.WomenFragment"
+        android:label="fragment_women"
+        tools:layout="@layout/fragment_women" />
+    <fragment
+        android:id="@+id/lifeFragment"
+        android:name="com.shoppingmallexam.ui.life.LifeFragment"
+        android:label="fragment_life"
+        tools:layout="@layout/fragment_life" />
+</navigation>
