@@ -62,16 +62,13 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
     private fun menuIconColorChange(menu: Menu, inflater: MenuInflater, color: String) {
 
         menuCurrentColor = color
-        Log.e(TAG, "menuIconColorChange: 호출" )
+        Log.e(TAG, "menuIconColorChange: 호출")
         menu.removeItem(R.id.appBarSearch)
 
-        if (color == WHITE) {
-            inflater.inflate(R.menu.app_bar_menu_white, menu)
-        } else {
-            inflater.inflate(R.menu.app_bar_menu_black, menu)
+        when (color) {
+            WHITE -> inflater.inflate(R.menu.app_bar_menu_white, menu)
+            else -> inflater.inflate(R.menu.app_bar_menu_black, menu)
         }
-
-
 
         val searchItem = menu.findItem(R.id.appBarSearch)
         val searchView = searchItem.actionView as SearchView
@@ -105,28 +102,27 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
     private fun motionLayoutStateListener() {
 
-        binding.motionLayoutContainer.setTransitionListener(object :
-            MotionLayout.TransitionListener {
+        binding.motionLayoutContainer.setTransitionListener(object : MotionLayout.TransitionListener {
 
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
             }
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                if (p3 > 0.98) {
 
-                    //여기서 앱바랑 BottomNavi 사라지고 안사라지고 설정하자
-                    if (menuCurrentColor == WHITE) {
+                //여기서 앱바랑 BottomNavi 사라지고 안사라지고 설정하자
+
+                when (p3) {
+
+                    in 0.98..1.0 -> if (menuCurrentColor == WHITE) {
                         menuIconColorChange(menu, inflater, BLACK)
                     }
 
-                    Toast.makeText(activity, "이미지 뷰페이저 닫힘", Toast.LENGTH_SHORT).show()
-                } else {
-
-                    if (menuCurrentColor == BLACK) {
+                    else -> if (menuCurrentColor == BLACK) {
                         menuIconColorChange(menu, inflater, WHITE)
                     }
 
                 }
+
 
             }
 
