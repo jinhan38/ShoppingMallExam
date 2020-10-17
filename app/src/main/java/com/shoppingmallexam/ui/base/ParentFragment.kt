@@ -1,10 +1,12 @@
 package com.shoppingmallexam.ui.base
 
+import android.app.ActionBar
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -40,6 +42,8 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentParentBinding.bind(view)
+
+
 
         setImageViewPager()
         motionLayoutStateListener()
@@ -102,7 +106,8 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
     private fun motionLayoutStateListener() {
 
-        binding.motionLayoutContainer.setTransitionListener(object : MotionLayout.TransitionListener {
+        binding.motionLayoutContainer.setTransitionListener(object :
+            MotionLayout.TransitionListener {
 
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
             }

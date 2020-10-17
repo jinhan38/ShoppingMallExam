@@ -7,7 +7,7 @@
     android:id="@+id/motionLayoutContainer"
     app:layoutDescription="@xml/fragment_parent_motion_scene"
     tools:context=".ui.base.ParentFragment">
-
+    
 
     <FrameLayout
         android:id="@+id/viewpagerWrap"
