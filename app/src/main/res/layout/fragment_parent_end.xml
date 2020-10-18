@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.base.ParentFragment">
 
+
     <FrameLayout
         android:id="@+id/viewpagerWrap"
         android:layout_width="match_parent"

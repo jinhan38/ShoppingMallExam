@@ -7,6 +7,7 @@
     tools:context=".ui.base.ParentFragment">
 
 
+
     <FrameLayout
         android:id="@+id/viewpagerWrap"
         android:layout_width="match_parent"
@@ -14,7 +15,8 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="#4CAF50">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/parentTopViewPager"
@@ -25,9 +27,9 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/imageTabLayout"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
-            android:layout_height="wrap_content"
             app:tabBackground="@drawable/tab_dot"
             app:tabGravity="center"
             app:tabIndicatorHeight="0dp" />
@@ -41,21 +43,21 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewpagerWrap">
+        app:layout_constraintTop_toBottomOf="@+id/viewpagerWrap"
+        tools:background="#FFEB3B">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/contentsTabLayout"
-            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             app:tabGravity="center"
             app:tabIndicatorColor="@android:color/black"
             app:tabMode="fixed"
             app:tabRippleColor="@null"
             app:tabTextAppearance="@style/tabLayout_textSize"
             app:tabTextColor="@android:color/black" />
-        
-    </LinearLayout>
 
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

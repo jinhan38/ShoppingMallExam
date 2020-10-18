@@ -1,7 +1,6 @@
 package com.shoppingmallexam.ui.base
 
 import android.app.ActionBar
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +12,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.shoppingmallexam.MainActivity
 import com.shoppingmallexam.R
 import com.shoppingmallexam.databinding.FragmentParentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,8 +24,8 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
     companion object {
         private const val TAG = "ParentFragment"
-        private const val WHITE: String = "WHITE"
-        private const val BLACK: String = "BLACK"
+        public const val WHITE: String = "WHITE"
+        public const val BLACK: String = "BLACK"
     }
 
     private val viewModel by viewModels<ParentViewModel>()
@@ -43,10 +43,10 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
         _binding = FragmentParentBinding.bind(view)
 
-
-
+        
         setImageViewPager()
         motionLayoutStateListener()
+
 
 
         setHasOptionsMenu(true)
@@ -57,21 +57,33 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+//        inflater.inflate(R.menu.app_bar_menu_black, menu); // 앞서 만든 menu를 inflate시킵니다.
+
         menuIconColorChange(menu, inflater, WHITE)
         this.menu = menu
         this.inflater = inflater
-
     }
 
     private fun menuIconColorChange(menu: Menu, inflater: MenuInflater, color: String) {
+
 
         menuCurrentColor = color
         Log.e(TAG, "menuIconColorChange: 호출")
         menu.removeItem(R.id.appBarSearch)
 
         when (color) {
-            WHITE -> inflater.inflate(R.menu.app_bar_menu_white, menu)
-            else -> inflater.inflate(R.menu.app_bar_menu_black, menu)
+            WHITE ->{
+                MainActivity.activity.actionBarShowOrHide(false)
+                inflater.inflate(R.menu.app_bar_menu_white, menu)
+//                mainActivity.actionBarShowOrHide(false)
+//                mainActivity.actionBarTextColorChange(WHITE)
+            }
+            else ->{
+                MainActivity.activity.actionBarShowOrHide(true)
+                inflater.inflate(R.menu.app_bar_menu_black, menu)
+//                mainActivity.actionBarShowOrHide(true)
+//                mainActivity.actionBarTextColorChange(BLACK)
+            }
         }
 
         val searchItem = menu.findItem(R.id.appBarSearch)

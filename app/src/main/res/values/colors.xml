@@ -7,4 +7,6 @@
     <color name="gray">#656262</color>
     <color name="transParentGray">#50656262</color>
     <color name="black">#000000</color>
+    <color name="basic_background">#FAFAFA</color>
+    
 </resources>
