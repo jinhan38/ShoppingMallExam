@@ -50,14 +50,20 @@
             android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabGravity="center"
+            app:tabGravity="fill"
             app:tabIndicatorColor="@android:color/black"
-            app:tabMode="fixed"
+            app:tabMode="scrollable"
             app:tabRippleColor="@null"
             app:tabTextAppearance="@style/tabLayout_textSize"
             app:tabTextColor="@android:color/black" />
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/contents_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray" />
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

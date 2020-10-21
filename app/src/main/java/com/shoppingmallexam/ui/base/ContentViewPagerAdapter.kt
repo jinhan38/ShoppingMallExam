@@ -1,11 +1,15 @@
 package com.shoppingmallexam.ui.base
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 
-class ContentViewPagerAdapter(fm: FragmentManager, private val fragment : List<Fragment> ) : FragmentPagerAdapter(fm) {
+@Suppress("DEPRECATION")
+class ContentViewPagerAdapter(fm: FragmentManager, private val fragment : MutableList<Fragment> ) : FragmentStatePagerAdapter(fm) {
 
+//    private lateinit var fragmentList: ArrayList<Fragment> = ArrayList<Fragment>()
 
 
     override fun getCount(): Int {
@@ -13,7 +17,8 @@ class ContentViewPagerAdapter(fm: FragmentManager, private val fragment : List<F
     }
 
     override fun getItem(position: Int): Fragment {
-        return fragment.get(position)
+        
+        return fragment[position]
     }
 
 }

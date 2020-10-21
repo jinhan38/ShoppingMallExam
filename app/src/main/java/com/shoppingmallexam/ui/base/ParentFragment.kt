@@ -12,9 +12,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayout
 import com.shoppingmallexam.MainActivity
 import com.shoppingmallexam.R
 import com.shoppingmallexam.databinding.FragmentParentBinding
+import com.shoppingmallexam.ui.Popular.PopularFragment
+import com.shoppingmallexam.ui.life.LifeFragment
+import com.shoppingmallexam.ui.man.ManFragment
+import com.shoppingmallexam.ui.women.WomenFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_parent.*
 
@@ -36,6 +41,7 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
     private lateinit var menu: Menu
     private lateinit var inflater: MenuInflater
     private var menuCurrentColor: String = WHITE
+    private var fragmentList: ArrayList<Fragment> = ArrayList<Fragment>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,14 +51,38 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
 
         MainActivity.activity.actionbarTitle("shoppingApp")
-        
+
         setImageViewPager()
         motionLayoutStateListener()
 
-
-
+        tabLayoutSetting()
         setHasOptionsMenu(true)
 
+    }
+
+    private fun tabLayoutSetting() {
+
+        contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("인기"))
+        contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("우먼"))
+        contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("맨"))
+        contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("라이프"))
+
+        activity?.supportFragmentManager!!.beginTransaction().replace(R.id.contents_fragment_container, PopularFragment()).commit()
+
+        contentsTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                contentsFragmentChange(tab!!.position)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+        })
 
     }
 
@@ -61,13 +91,9 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
         binding.parentTopViewPager.adapter = pagerAdapter
         binding.imageTabLayout.setupWithViewPager(parentTopViewPager)
 
-        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("전체"))
-        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("우먼"))
-        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("맨"))
-        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("라이프"))
 
     }
-    
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.app_bar_menu_white, menu); // 앞서 만든 menu를 inflate시킵니다.
@@ -93,8 +119,6 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
             }
         })
     }
-
-
 
 
     private fun motionLayoutStateListener() {
@@ -134,6 +158,23 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
         })
     }
+
+    private fun contentsFragmentChange(fragmentPosition: Int) {
+        Log.e(TAG, "contentsFragmentChange: $fragmentPosition" )
+        
+        var fragment: Fragment? = null
+        when (fragmentPosition) {
+            0 -> fragment = PopularFragment()
+            1 -> fragment = ManFragment()
+            2 -> fragment = WomenFragment()
+            3 -> fragment = LifeFragment()
+        }
+
+        activity?.supportFragmentManager!!.beginTransaction().replace(R.id.contents_fragment_container, fragment!!).commit()
+
+
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
