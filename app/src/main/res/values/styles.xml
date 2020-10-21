@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MyActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+    <style name="MyActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:background">@color/basic_background</item>
     </style>
 

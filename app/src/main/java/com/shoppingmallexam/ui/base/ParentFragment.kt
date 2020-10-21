@@ -43,6 +43,8 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
         _binding = FragmentParentBinding.bind(view)
 
+
+        MainActivity.activity.actionbarTitle("shoppingApp")
         
         setImageViewPager()
         motionLayoutStateListener()
@@ -54,37 +56,25 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
     }
 
+    private fun setImageViewPager() {
+        val pagerAdapter = activity?.supportFragmentManager?.let { ScreenSlidePagerAdapter(it) }
+        binding.parentTopViewPager.adapter = pagerAdapter
+        binding.imageTabLayout.setupWithViewPager(parentTopViewPager)
 
+        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("전체"))
+        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("우먼"))
+        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("맨"))
+        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("라이프"))
+
+    }
+    
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.app_bar_menu_black, menu); // 앞서 만든 menu를 inflate시킵니다.
+        inflater.inflate(R.menu.app_bar_menu_white, menu); // 앞서 만든 menu를 inflate시킵니다.
 
-        menuIconColorChange(menu, inflater, WHITE)
+//        menuIconColorChange(menu, inflater, WHITE)
         this.menu = menu
         this.inflater = inflater
-    }
-
-    private fun menuIconColorChange(menu: Menu, inflater: MenuInflater, color: String) {
-
-
-        menuCurrentColor = color
-        Log.e(TAG, "menuIconColorChange: 호출")
-        menu.removeItem(R.id.appBarSearch)
-
-        when (color) {
-            WHITE ->{
-                MainActivity.activity.actionBarShowOrHide(false)
-                inflater.inflate(R.menu.app_bar_menu_white, menu)
-//                mainActivity.actionBarShowOrHide(false)
-//                mainActivity.actionBarTextColorChange(WHITE)
-            }
-            else ->{
-                MainActivity.activity.actionBarShowOrHide(true)
-                inflater.inflate(R.menu.app_bar_menu_black, menu)
-//                mainActivity.actionBarShowOrHide(true)
-//                mainActivity.actionBarTextColorChange(BLACK)
-            }
-        }
 
         val searchItem = menu.findItem(R.id.appBarSearch)
         val searchView = searchItem.actionView as SearchView
@@ -104,17 +94,8 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
         })
     }
 
-    private fun setImageViewPager() {
-        val pagerAdapter = activity?.supportFragmentManager?.let { ScreenSlidePagerAdapter(it) }
-        binding.parentTopViewPager.adapter = pagerAdapter
-        binding.imageTabLayout.setupWithViewPager(parentTopViewPager)
 
-        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("전체"))
-        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("우먼"))
-        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("맨"))
-        binding.contentsTabLayout.addTab(binding.contentsTabLayout.newTab().setText("라이프"))
 
-    }
 
     private fun motionLayoutStateListener() {
 
@@ -126,16 +107,18 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
 
-                //여기서 앱바랑 BottomNavi 사라지고 안사라지고 설정하자
-
                 when (p3) {
 
-                    in 0.98..1.0 -> if (menuCurrentColor == WHITE) {
-                        menuIconColorChange(menu, inflater, BLACK)
+                    in 0.98..1.0 -> {
+
+                        MainActivity.activity.customActionBar.actionBarShowOrHide(true)
+//                        menuIconColorChange(menu, inflater, BLACK)
+
                     }
 
-                    else -> if (menuCurrentColor == BLACK) {
-                        menuIconColorChange(menu, inflater, WHITE)
+                    else -> {
+                        MainActivity.activity.customActionBar.actionBarShowOrHide(false)
+//                        menuIconColorChange(menu, inflater, WHITE)
                     }
 
                 }

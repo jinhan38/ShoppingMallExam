@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ShoppingApi {
 
-    companion object {
+    companion object {                           
         const val BASE_URL = "https://openapi.naver.com/"
         const val CLIENT_ID = "2ce3y4edDmaa_GFRf8cN"
         const val CLIENT_Secret = "4AwVW6xyzi"

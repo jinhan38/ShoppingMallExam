@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.shoppingmallexam.data.CustomActionBar
 import com.shoppingmallexam.ui.base.ParentFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var activity: MainActivity
     }
     private lateinit var navController: NavController
+    public lateinit var customActionBar : CustomActionBar
 //    private lateinit var actionBar: ActionBar
 
     @SuppressLint("RestrictedApi")
@@ -33,7 +35,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         activity = this
 
-        supportActionBar?.setShowHideAnimationEnabled(true)
+
+        customActionBar = supportActionBar?.let { CustomActionBar(this, it) }!!
+        customActionBar.setActionBar()
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
@@ -46,34 +50,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun actionBarTextColorChange(strColor: String) {
+    fun actionbarTitle(title : String){
 
-        var color : Int = 0
-
-        color = when (strColor) {
-            ParentFragment.WHITE -> activity.resources.getColor(R.color.white)
-            else -> activity.resources.getColor(R.color.black)
-        }
-
-
-        val text: Spannable = SpannableString(supportActionBar?.title)
-        text.setSpan(
-            ForegroundColorSpan(color),
-            0,
-            text.length,
-            Spannable.SPAN_INCLUSIVE_INCLUSIVE
-        )
-        supportActionBar?.title = text
+        customActionBar.actionbarTitle(title)
+//        supportActionBar?.title = title
     }
 
-    fun actionBarShowOrHide(isShowing: Boolean) {
-        when (isShowing) {
-            true -> supportActionBar?.show()
-            else -> supportActionBar?.hide()
-
-        }
-
-    }
 
 
     override fun onSupportNavigateUp(): Boolean {
