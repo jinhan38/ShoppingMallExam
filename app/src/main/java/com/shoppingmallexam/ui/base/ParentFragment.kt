@@ -50,6 +50,7 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
         _binding = FragmentParentBinding.bind(view)
 
 
+        
         MainActivity.activity.actionbarTitle("shoppingApp")
 
         setImageViewPager()
@@ -96,7 +97,7 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.app_bar_menu_white, menu); // 앞서 만든 menu를 inflate시킵니다.
+        inflater.inflate(R.menu.app_bar_menu_black, menu); // 앞서 만든 menu를 inflate시킵니다.
 
 //        menuIconColorChange(menu, inflater, WHITE)
         this.menu = menu
@@ -104,6 +105,7 @@ class ParentFragment : Fragment(R.layout.fragment_parent) {
 
         val searchItem = menu.findItem(R.id.appBarSearch)
         val searchView = searchItem.actionView as SearchView
+
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

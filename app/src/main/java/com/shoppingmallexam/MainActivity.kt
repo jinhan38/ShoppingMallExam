@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         activity = this
 
 
+
+
         customActionBar = supportActionBar?.let { CustomActionBar(this, it) }!!
         customActionBar.setActionBar()
 
